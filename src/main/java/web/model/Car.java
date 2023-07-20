@@ -1,9 +1,23 @@
 package web.model;
 
+import jakarta.persistence.*;
+
+@Entity
+@Table(name = "cars")
 public class Car {
+    @Id
+    @Column
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long id;
+    @Column(name = "brand")
     private String brand;
+    @Column(name = "model")
     private String model;
+    @Column(name = "produced in")
     private int prodYear;
+
+    public Car() {
+    }
 
     public Car(String brand, String model, int prodYear) {
         this.brand = brand;
