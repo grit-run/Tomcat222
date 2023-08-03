@@ -18,12 +18,7 @@ public class CarDaoImpl implements CarDao {
     }
 
     @Override
-    public void addCar(Car car) {
-        entityManager.persist(car);
-    }
-
-    @Override
-    public List<Car> getCarList(List<Car> list, int limit) {
+    public List<Car> getCarList(int limit) {
         if (limit > 5) {
             return entityManager.createQuery("select cr from Car cr").getResultList();
         }
