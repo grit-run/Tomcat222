@@ -4,12 +4,12 @@ import jakarta.persistence.EntityManager;
 import web.model.Car;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class CarDaoImpl implements CarDao {
-    private EntityManager entityManager;
+    List<Car> carService = new ArrayList<>();
 
     {
-        List<Car> carService = new ArrayList<>();
         carService.add(new Car("A", "A1",1998));
         carService.add(new Car("B", "B2",1999));
         carService.add(new Car("C", "C4",1997));
@@ -17,11 +17,12 @@ public class CarDaoImpl implements CarDao {
         carService.add(new Car("J", "J8",1995));
     }
 
+
     @Override
     public List<Car> getCarList(int limit) {
         if (limit > 5) {
-            return entityManager.createQuery("select cr from Car cr").getResultList();
+            return carService;
         }
-        return entityManager.createQuery("select cr from Car cr order by cr.id").setFirstResult(limit).getResultList();
+        return carService.stream().limit(limit).collect(Collectors.toList());
     }
 }
