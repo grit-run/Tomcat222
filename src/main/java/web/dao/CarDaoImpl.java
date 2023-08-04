@@ -1,13 +1,13 @@
 package web.dao;
 
-import jakarta.persistence.EntityManager;
+import org.springframework.stereotype.Repository;
 import web.model.Car;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
-
+@Repository
 public class CarDaoImpl implements CarDao {
-    List<Car> carService = new ArrayList<>();
+    private static final List <Car> carService = new ArrayList<>();
 
     {
         carService.add(new Car("A", "A1",1998));
