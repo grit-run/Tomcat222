@@ -6,10 +6,11 @@ import web.dao.CarDao;
 import web.model.Car;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class CarServiceImpl implements CarService {
-    private CarDao carDao;
+    private final CarDao carDao;
     @Autowired
     public CarServiceImpl(CarDao carDao) {
         this.carDao = carDao;
@@ -18,6 +19,6 @@ public class CarServiceImpl implements CarService {
 
     @Override
     public List<Car> getCarList(int number) {
-        return carDao.getCarList(number);
+        return carDao.getCarList(number).stream().limit(number).collect(Collectors.toList());
     }
 }
